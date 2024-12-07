@@ -26,6 +26,17 @@ public class Transacao {
     public void setContaDestino(ContaCorrente destino) {
         this.destinoCorrente = destino;
     }
+    
+    public ContaCorrente getContaCorrenteVinculada() {
+        return destinoCorrente;
+    }
+    public ContaInvestimento getContaInvestimentoVinculada() {
+        return destinoInvestimento;
+    }
+    public Produto getProdutoVinculado() {
+        return produto;
+    }
+    
 
     public void setContaDestino(ContaInvestimento destino) {
         this.destinoInvestimento = destino;
@@ -50,46 +61,34 @@ public class Transacao {
     public String getDescricao() {
         return descricao;
     }
-
-    public String getTransacao() {
-        boolean isProduto = !this.produto.getNome().isEmpty();
-        boolean isContaCorrente = this.destinoCorrente.getConta().getUsuario().getNome().isBlank();
-        boolean isContaInvestimento = this.destinoInvestimento.getConta().getUsuario().getNome().isBlank();
-
-        if (isProduto) {
-            return tipo + " - R$ " + valor + " - " + data + " - " + descricao + " - " + this.produto.getNome();
-        }
-        if (isContaCorrente) {
-            return tipo + " - R$ " + valor + " - " + data + " - " + descricao + " - " + this.destinoCorrente.getConta();
-        }
-        if (isContaInvestimento) {
-            return tipo + " - R$ " + valor + " - " + data + " - " + descricao + " - " + this.destinoInvestimento.getConta();
-        }
-
-        // Montando a string de transação com as informações escolhidas
-        return tipo + " - R$ " + valor + " - " + data + " - " + descricao + " - ";
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     
-    private void getTransacao() {
-        String texto = tipo + " - R$ " + valor + " - " + data + " - " + descricao;
-        
-        boolean isProduto = this.produto.getNome().isEmpty();
-        boolean isContaCorrente = this.destinoCorrente.getConta().getUsuario().getNome().isBlank();
-        boolean isContaInvestimento = this.destinoInvestimento.getConta().getUsuario().getNome().isBlank();
-
-        if (!isProduto) {
-            texto += " - " + this.produto.getNome();
-        }else if (isContaCorrente) {
-            texto.concat(this.destinoInvestimento.getConta().toString());
-        }else if (isContaInvestimento) {
-            return tipo + " - R$ " + valor + " - " + data + " - " + descricao + " - " + this.destinoInvestimento.getConta();
+    public String getDetalheVinculado() {
+        String texto = "";
+        if (produto != null && produto.getNome() != null && !produto.getNome().isEmpty()) {
+            texto += "Produto: " + produto.getNome();
+        } else if (destinoCorrente != null && destinoCorrente.getUsuario().getNome() != null) {
+            texto += "Conta Corrente: " + destinoCorrente.getUsuario().getNome();
+        } else if (destinoInvestimento != null && destinoInvestimento.getUsuario().getNome() != null) {
+            texto += "Conta Investimento: " + destinoInvestimento.getUsuario().getNome();
         }
-
-        // Montando a string de transação com as informações escolhidas
+        
         return texto;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getTransacao() {
+        String texto = tipo + " - R$ " + valor + " - " + data;
+        
+        if (descricao == null) {
+            texto += " - " + descricao;
+        }
+        String detalhe = getDetalheVinculado();
+        if (!"".equals(detalhe)) {
+            texto += " - " + detalhe;
+        }
+
+        return texto;
     }
 }

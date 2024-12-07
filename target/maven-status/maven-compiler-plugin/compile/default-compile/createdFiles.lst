@@ -1,13 +1,10 @@
+br\com\bubank\banco\Banco.class
 br\com\bubank\banco\ContaCorrente.class
 br\com\bubank\banco\Conta.class
-br\com\bubank\utils\Utilidades.class
-br\com\bubank\banco\ContaInvestimento.class
-br\com\bubank\investimento\Produto.class
-br\com\bubank\banco\Banco.class
 Main.class
+br\com\bubank\banco\ContaInvestimento.class
 br\com\bubank\model\Usuario.class
 br\com\bubank\model\Pessoa.class
-br\com\bubank\banco\TipoTransacao.class
-br\com\bubank\investimento\ExtratoInvestimento.class
 br\com\bubank\banco\Transacao.class
+br\com\bubank\investimento\Produto.class
 br\com\bubank\banco\Extrato.class

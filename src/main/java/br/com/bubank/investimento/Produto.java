@@ -46,4 +46,8 @@ public class Produto {
     public void setValorMinimo(double valorMinimo) {
         this.valorMinimo = valorMinimo;
     }
+    
+    public String getDetalhes() {
+        return this.nome + " investido R$" + this.saldo + " a uma taxa de " + this.taxa;
+    }
 }

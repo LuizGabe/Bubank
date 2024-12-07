@@ -2,7 +2,7 @@ package br.com.bubank.banco;
 
 import br.com.bubank.model.Usuario;
 
-public class Conta {
+public abstract class Conta {
     private final Usuario usuario;
     private final String numeroConta;
     private String agencia;
@@ -13,13 +13,22 @@ public class Conta {
         this.agencia = "0001";
     }
 
-    public String getNumeroConta() { return this.numeroConta; }
+    public String getNumeroConta() {
+        return this.numeroConta;
+    }
 
-    public String getAgencia() { return this.agencia; }
-    public void setAgencia(String agencia) { this.agencia = agencia; }
+    public String getAgencia() {
+        return this.agencia;
+    }
 
-    public Usuario getUsuario() { return this.usuario; }
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
 
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    // Esse método é aplicado de formas diferentes pelas Contas Corrente e Investimento.
+    public abstract void exibirDetalhes();
 }
-
-
